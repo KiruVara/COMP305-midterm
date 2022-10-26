@@ -50,6 +50,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.RightArrow))
+        {
+            facingRight = true;
 
+        }
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            facingRight = false;
+        }
+        else
+            rBody.velocity = new Vector2(0, rBody.velocity.y);
+
+        //Make sure character flips for animations
+        if (facingRight)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        //animation variables
+        anim.SetFloat("Speed", Mathf.Abs(rBody.velocity.x));
+        anim.SetBool("Grounded", isGrounded);
     }
 }
