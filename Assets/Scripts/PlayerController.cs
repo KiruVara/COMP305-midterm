@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private bool isGrounded = false;
 
+    //animation ducking
+    private bool isDucking = false; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,8 +75,17 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        //check if ducking
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            isDucking = true;
+
+        }
+        else
+            isDucking = false;
         //animation variables
-        anim.SetFloat("Speed", Mathf.Abs(rBody.velocity.x));
-        anim.SetBool("Grounded", isGrounded);
+        anim.SetFloat("xSpeed", Mathf.Abs(rBody.velocity.x));
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isDucking", isDucking);
     }
 }
