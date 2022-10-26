@@ -23,7 +23,11 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
 
     //animation ducking
-    private bool isDucking = false; 
+    private bool isDucking = false;
+
+    //for chest
+    public OpenChest oc;
+    public bool opened = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -87,5 +91,16 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("xSpeed", Mathf.Abs(rBody.velocity.x));
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isDucking", isDucking);
+    }
+
+    //open chest
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == ("Chest") && Input.GetKey(open) && opened == false)
+        {
+            oc.Open();
+            opened = true; 
+        }
+
     }
 }
